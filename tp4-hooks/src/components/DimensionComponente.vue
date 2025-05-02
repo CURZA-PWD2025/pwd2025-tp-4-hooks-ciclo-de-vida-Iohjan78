@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Dimenciones:</h2>
+        <h2>Dimensiones:</h2>
         <h3>{{ altura }} px. x {{ ancho }} px.</h3>
     </div>
 </template>
