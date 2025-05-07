@@ -2,47 +2,52 @@
 import Lista from "./components/Lista.vue";
 import Tareas from "./components/Tareas.vue";
 import DimensionComponente from "./components/DimensionComponente.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
-const selectedComponent = ref("dimension");
+const componenteId = ref("Lista");
+
+const components = {
+  Lista,
+  Tareas,
+  DimensionComponente,
+};
+
+const selectedComponent = computed(() => components[componenteId.value]);
 </script>
 
 <template>
-  <div class="container">
-    <div class="selector">
-      <select v-model="selectedComponent">
-        <option value="lista">Lista</option>
-        <option value="tareas">Tareas</option>
-        <option value="dimension">Dimension de navegador</option>
+  <div class="barra-select">
+    <div class="selector-wrapper">
+      <select class="selector" v-model="componenteId">
+        <option value="Lista">Lista</option>
+        <option value="Tareas">Tareas</option>
+        <option value="DimensionComponente">Dimensiones</option>
       </select>
     </div>
-    <div class="componente">
-      <DimensionComponente v-if="selectedComponent === 'dimension'" />
-      <Lista v-if="selectedComponent === 'lista'" />
-      <Tareas v-if="selectedComponent === 'tareas'" />
-    </div>
   </div>
+  <component :is="selectedComponent" />
 </template>
 
 <style scoped>
-
-
-.selector {
-  margin-bottom: 1.5rem;
-}
-
-
-.selector {
-  position: fixed;
-  top: 0;
-  left: 0;
+.barra-select {
   width: 100%;
-  padding: 0.5rem;
-  background: rgb(255, 69, 69);
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(41, 41, 41); /* fondo completo */
+  padding: 20px 0;
 }
 
+.selector-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+}
 
-
+.selector {
+  width: 200px; /* select más pequeño */
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 </style>

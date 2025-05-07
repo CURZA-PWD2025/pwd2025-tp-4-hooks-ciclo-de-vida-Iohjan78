@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <h2>Dimensiones:</h2>
-        <h3>{{ altura }} px. x {{ ancho }} px.</h3>
-    </div>
+  <div class="container">
+    <h2>Dimensiones:</h2>
+    <h3>{{ altura }} px. x {{ ancho }} px.</h3>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted} from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
-const altura= ref(window.innerHeight);
-const ancho= ref(window.innerWidth);
+const altura = ref(window.innerHeight);
+const ancho = ref(window.innerWidth);
 
 function leerValores() {
   altura.value = window.innerHeight;
@@ -17,14 +17,20 @@ function leerValores() {
 }
 
 onMounted(() => {
-  window.addEventListener('resize', leerValores);
+  window.addEventListener("resize", leerValores);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', leerValores);
+  window.removeEventListener("resize", leerValores);
 });
 </script>
 
 <style scoped>
-
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
 </style>
